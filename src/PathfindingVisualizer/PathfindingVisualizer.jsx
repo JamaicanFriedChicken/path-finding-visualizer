@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
+import { astar } from "../algorithms/astar";
 
 import "./PathfindingVisualizer.css";
 
@@ -38,7 +39,7 @@ export default class PathfindingVisualizer extends Component {
         this.setState({ mouseIsPressed: false });
     }
 
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
         for (let i = 0; i <= visitedNodesInOrder.length; i++) {
             if (i === visitedNodesInOrder.length) {
                 setTimeout(() => {
@@ -74,7 +75,18 @@ export default class PathfindingVisualizer extends Component {
         const nodesInShortestPathOrder = getNodesInShortestPathOrder(
             finishNode
         );
-        this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+        this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
+
+    visualizeAstar() {
+        const { grid } = this.state;
+        const startNode = grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        const visitedNodesInOrder = astar(grid, startNode, finishNode);
+        const nodesInShortestPathOrder = getNodesInShortestPathOrder(
+            finishNode
+        );
+        this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
     render() {
@@ -84,6 +96,9 @@ export default class PathfindingVisualizer extends Component {
             <>
                 <button onClick={() => this.visualizeDijkstra()}>
                     Visualize Dijkstra's Algorithm
+                </button>
+                <button onClick={() => this.visualizeAstar()}>
+                    Visualize Astar's Algorithm
                 </button>
                 <div className="grid">
                     {grid.map((row, rowIdx) => {
