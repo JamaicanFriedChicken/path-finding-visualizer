@@ -1,3 +1,5 @@
+// https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm
+
 // Performs Dijkstra's algorithm; returns all the nodes in the order
 // in which they were visited. Also makes the nodes point back to their
 // previous node, effectively allowing us to compute the shortest path
@@ -33,7 +35,7 @@ function updateUnvisitedNeighbors(node, grid) {
     }
 }
 
-function getUnvisitedNeighbors(node, grid) {
+export function getUnvisitedNeighbors(node, grid) {
     const neighbors = [];
     const { col, row } = node;
     if (row > 0) neighbors.push(grid[row - 1][col]);
