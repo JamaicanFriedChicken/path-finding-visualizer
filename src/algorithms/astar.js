@@ -1,4 +1,4 @@
-import { getUnvisitedNeighbors } from "../algorithms/dijkstra";
+import { getUnvisitedNeighbors } from "../algorithms/bfs";
 import Heap from "heap";
 var yetToVisit;
 
@@ -13,7 +13,9 @@ export function astar(grid, startNode, finishNode) {
     yetToVisit = new Heap(function(a, b) {
         return a.fCost - b.fCost;
     });
-    initializeCosts(grid); // make all nodes have fCost, gCost, hCost infinity at first
+
+    // make all nodes have fCost, gCost, hCost infinity at first
+    initializeCosts(grid);
 
     // set the costs of the startNode to 0
     startNode.fCost = 0;
@@ -80,6 +82,8 @@ export function manhattanDistance(colA, colB, rowA, rowB) {
     return a + b;
 }
 
+// Make all nodes' fCost, gCost and hCost values initialized to infinity
+// and stores it in the heap.
 function initializeCosts(grid) {
     for (let row of grid) {
         for (let node of row) {
