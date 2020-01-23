@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
+import "./PathfindingVisualizer.css";
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
 import { astar } from "../algorithms/astar";
 import { BFS } from "../algorithms/bfs";
@@ -9,7 +10,9 @@ import { biDirectional } from "../algorithms/BiDirectional";
 import { simpleMaze } from "../Maze/SimpleMaze";
 import { displayAlgorithmInfo } from "../algorithms/AlgorithmInfo";
 
-import "./PathfindingVisualizer.css";
+import "../Components/Button.css";
+import "../Components/Modal.css";
+import "../Components/AlgorithmModal.css";
 
 export const NUM_COLUMNS = 50;
 export const NUM_ROWS = 20;
@@ -34,6 +37,7 @@ export default class PathfindingVisualizer extends Component {
     componentDidMount() {
         const grid = getInitialGrid();
         this.setState({ grid });
+        window.onload = this.openHelpMenu();
     }
 
     handleMouseDown(row, col) {
@@ -190,7 +194,7 @@ export default class PathfindingVisualizer extends Component {
                         </button>
                         <button onClick={() => this.visualizeWalls(0)}>
                             {" "}
-                            Scatter{" "}
+                            Random{" "}
                         </button>
                         <button onClick={() => this.visualizeWalls(2)}>
                             {" "}
@@ -200,7 +204,12 @@ export default class PathfindingVisualizer extends Component {
                             {" "}
                             Horizontal Maze{" "}
                         </button>
-                        {/* <button onClick={() => this.generateMaze()}> Generate Maze</button> */}
+                        <button onClick={() => this.clearGrid()}>
+                            Clear Board
+                        </button>
+                        <button onClick={() => this.clearPath(grid)}>
+                            Clear Path
+                        </button>
                     </div>
                     <button
                         id="info-button"
@@ -252,30 +261,26 @@ export default class PathfindingVisualizer extends Component {
                 <div className="container">
                     <div className="algo-btn-group">
                         <button onClick={() => this.openAlgorithmMenu(0)}>
-                            {" "}
-                            &#9432;{" "}
+                            {"   "}
+                            &#9432;{"   "}
                         </button>
                         <button onClick={() => this.openAlgorithmMenu(1)}>
-                            {" "}
-                            &#9432;{" "}
+                            {"   "}
+                            &#9432;{"   "}
                         </button>
                         <button onClick={() => this.openAlgorithmMenu(2)}>
-                            {" "}
-                            &#9432;{" "}
+                            {"   "}
+                            &#9432;{"   "}
                         </button>
                         <button onClick={() => this.openAlgorithmMenu(3)}>
-                            {" "}
-                            &#9432;{" "}
+                            {"   "}
+                            &#9432;{"   "}
                         </button>
                         <button onClick={() => this.openAlgorithmMenu(4)}>
-                            {" "}
-                            &#9432;{" "}
+                            {"   "}
+                            &#9432;{"   "}
                         </button>
                         <button onClick={() => this.openAlgorithmMenu(5)}>
-                            {" "}
-                            &#9432;{" "}
-                        </button>
-                        <button onClick={() => this.openAlgorithmMenu(6)}>
                             {" "}
                             &#9432;{" "}
                         </button>
@@ -401,7 +406,6 @@ export default class PathfindingVisualizer extends Component {
         if (isRunning) return;
         const newgrid = clearGridHelperKeepWalls(grid);
         this.setState({ grid: newgrid });
-        return newgrid;
     }
 
     refreshPage() {
@@ -460,34 +464,31 @@ export default class PathfindingVisualizer extends Component {
             case 1: {
                 document.getElementById("helpMenu-content").innerHTML =
                     this.HTMLHelper(MAXSLIDE) +
-                    `
-            <h2 style= "margin-top: -0.3em;"> Welcome to the Pathfinding Visualizer </h2> 
-            <h3 style= "margin-top: -0.7em;"> Made by Michael Lue</h3>
-            <p> This path finding application involves multiple path finding algorithms from the most famous ones i.e. Dijkstra's to a somewhat basic algorithm such as Breadth First Search. 
+                    `<h2 style= "margin-top: -0.3em;"> Welcome to the Pathfinding Visualizer </h2>
+            <p> This pathfinding application involves multiple path finding algorithms from the most famous ones i.e. Dijkstra to a basic search algorithm such as Breadth First Search. 
             Pathfinding algorithms normally compute the shortest path to take from one point to another. It is a fundamental component used in a myriad of applications e.g. Google maps, line following robots and much more. 
-            You are also able to generate mazes to test the different algorithms. 
-            Note: For the shortest guaranteed path, use A*.</p>
+            You are also able to generate mazes to test the different algorithms. </p>
             <p> Click on <strong>Next</strong> to continue the tutorial. Otherwise click anywhere outside the box, or the <strong>X</strong> button to play around with our application</p>
-            <p><img style="display: block; margin-left: auto; margin-right: auto; margin-top: -2.8em;" src="https://i.ibb.co/P9fVVW8/slide0-png.png" alt="" width="225" height="235" /></p>`;
+            <p><img style="display: block; margin-left: auto; margin-right: auto; margin-top: 0px;" src="https://i.imgur.com/OkhlgCs.png" alt="" width="240" height="235" /></p>`;
                 break;
             }
 
             case 2: {
                 document.getElementById("helpMenu-content").innerHTML =
                     this.HTMLHelper(MAXSLIDE) +
-                    `<h2 style= "margin-top: -0.3em;">Inspiration</h2>
-            <p> The motivation for this project all started , 
-             with only the fundamentals of Computer Science to a minimum extent, I had to dig deeper to understand much more.
-             What better way to learn than to build and create something captivating and visual. I hope this application 
-             allows you to understand how each algorithm works.</p>
-            <p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://image.flaticon.com/icons/png/512/584/584641.png" alt="" width="129" height="129" /></p>`;
+                    `<h2 style= "margin-top: -0.3em;">Motivation</h2>
+            <p> My motivation for this project stems from observing the beauty and intricacy of algorithms,  
+             with only the fundamentals of Computer Science, I had to delve deeper to understand much more. As humans we are <strong>lazy</strong>
+             so what better way to learn than to build and create something captivating and visually pleasing to understand more about these algorithms. 
+             I hope this application allows you to understand how each algorithm works.</p>
+            <p><img style="display: block; margin-left: auto; margin-right: auto; margin-top: 50px;" src="https://i.imgur.com/5L2AhLI.png" alt="" width="129" height="129" /></p>`;
                 break;
             }
 
             case 3: {
                 document.getElementById("helpMenu-content").innerHTML =
                     this.HTMLHelper(MAXSLIDE) +
-                    `<h2 style= "margin-top: -0.3em;"> How to Start? </h2>
+                    `<h2 style= "margin-top: -0.3em;"> Where to Start? </h2>
             <p style = "line-height: 1.15em;"> Simply left-click your mouse and hover anywhere on the grid to generate walls. 
                 To auto-generate mazes you have a few selections of which type of mazes you'd like.Proceed to click any of the algorithms 
                 afterwards then magically observe the characteristics of each pathfinding algorithm. You can drag the start and
@@ -496,12 +497,12 @@ export default class PathfindingVisualizer extends Component {
             <table style="height: 108px; width: 190; margin-left: auto; margin-right: auto;">
             <tbody>
             <tr style="height: 33.8px;">
-            <td style="width: 65px; height: 33.8px; text-align: center;"><img src="https://icons-for-free.com/iconfiles/png/512/double+arrow+doublechevronright+right+arrows+icon-1320185729292506033.png" alt="" width="27" height="27" /></td>
-            <td style="width: 116px; height: 33.8px; text-align: left;">= startNode</td>
+            <td style="width: 65px; height: 33.8px; text-align: center;"><img src="https://icons-for-free.com/iconfiles/png/512/double+arrow+doublechevronright+right+arrows+icon-1320185729292506033.png" alt="" width="35" height="40" /></td>
+            <td style="width: 116px; height: 30px; text-align: left;">= Start Node</td>
             </tr>
             <tr style="height: 17px;">
-            <td style="width: 65px; height: 17px; text-align: center;"><img src="https://i.pinimg.com/originals/ba/3f/f2/ba3ff2209d0c43655116b31f8e2bbd65.png" alt="" width="27" height="27" /></td>
-            <td style="width: 116px; height: 17px; text-align: left;">= finishNode</td>
+            <td style="width: 65px; height: 17px; text-align: center;"><img src="https://i.pinimg.com/originals/ba/3f/f2/ba3ff2209d0c43655116b31f8e2bbd65.png" alt="" width="30" height="35" /></td>
+            <td style="width: 116px; height: 17px; text-align: left;">= Finish Node</td>
             </tr>
             </tbody>
             </table>
@@ -519,7 +520,9 @@ export default class PathfindingVisualizer extends Component {
               <tr>
               <td><img src="https://i.imgur.com/fnhxgNj.jpg" alt="" width="59" height="60" /></td>
               <td>
-              <p style="text-align: left; padding-left: 10px">Click on this icon beside any pathfinding algorithm to view details about&nbsp;how to use the algorithm, the time complexity, and detailed commented code about how the algorithm works. Feel free to go to our Github repository on the next page to see more implementation details</p>
+              <p style="text-align: left; padding-left: 10px">Click on this icon beside any pathfinding algorithm to view details about&nbsp;
+                how to use the algorithm, the time complexity, and detailed commented code about how the algorithm works.
+                Feel free to go to my Github repository on the next page to see how they are implemented</p>
               </td>
               </tr>
               </tbody>
@@ -534,11 +537,11 @@ export default class PathfindingVisualizer extends Component {
                     `<h2 style= "margin-top: -0.3em;">Before You Start</h2>
               <p> I hope you'll have fun fiddling with this application, for further questions or feedback, please do not hesitate to contact me.
               The code can be found on my Github repository at <a href = "https://github.com/JamaicanFriedChicken/path-finding-visualizer" target="_blank">path-finding-visualizer</a> </p>          
-              <p>*Note: if your screen is small and the proportions of the maze seem wrong, use CTRL – to zoom out</p>
+              <p><strong>Note: if your screen is small and the proportions of the maze seem wrong, use CTRL – to zoom out</strong></p>  
               <table style="height: 227px; margin-left: auto; margin-right: auto; width: 552px;">
               <tbody>
               <tr>
-              <td style="width: 199px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://image.flaticon.com/icons/png/512/87/87090.png" alt="" width="152" height="152" /></td>
+              <td style="width: 199px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/DdzVMbd.png" alt="" width="152" height="152" /></td>
               </tr>
               </tbody>
               </table>
