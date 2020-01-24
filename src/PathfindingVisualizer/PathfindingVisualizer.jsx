@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Node from "./Node/Node";
-import "./PathfindingVisualizer.css";
+
 import { dijkstra, getNodesInShortestPathOrder } from "../algorithms/dijkstra";
 import { astar } from "../algorithms/astar";
 import { BFS } from "../algorithms/bfs";
@@ -8,8 +8,9 @@ import { DFS } from "../algorithms/dfs";
 import { greedyBestFS } from "../algorithms/greedybestfs";
 import { biDirectional } from "../algorithms/BiDirectional";
 import { simpleMaze } from "../Maze/SimpleMaze";
+import { displayAlgorithmInfo } from "../Components/AlgorithmInfo";
 
-import { displayAlgorithmInfo } from "../algorithms/AlgorithmInfo";
+import "./PathfindingVisualizer.css";
 import "../Components/Button.css";
 import "../Components/Modal.css";
 import "../Components/AlgorithmModal.css";
@@ -195,7 +196,7 @@ export default class PathfindingVisualizer extends Component {
                         </button>
                         <button onClick={() => this.visualizeWalls(0)}>
                             {" "}
-                            Random{" "}
+                            Random Maze{" "}
                         </button>
                         <button onClick={() => this.visualizeWalls(2)}>
                             {" "}
@@ -302,7 +303,7 @@ export default class PathfindingVisualizer extends Component {
                         <button onClick={() => this.visualizeAlgorithm(4)}>
                             Greedy Best First Search
                         </button>
-                        <button onClick={() => this.visualizeWalls(0)}>
+                        <button onClick={() => this.visualizeWalls(5)}>
                             BiDirectional BFS
                         </button>
                     </div>
@@ -498,7 +499,7 @@ export default class PathfindingVisualizer extends Component {
             <table style="height: 108px; width: 190; margin-left: auto; margin-right: auto;">
             <tbody>
             <tr style="height: 33.8px;">
-            <td style="width: 65px; height: 33.8px; text-align: center;"><img src="https://i.imgur.com/IHB0b8r.png" alt="" width="35" height="40" /></td>
+            <td style="width: 65px; height: 33.8px; text-align: center;"><img src="https://i.imgur.com/IHB0b8r.png" alt="" width="32" height="35" /></td>
             <td style="width: 116px; height: 30px; text-align: left;">= Start Node</td>
             </tr>
             <tr style="height: 17px;">
@@ -522,7 +523,7 @@ export default class PathfindingVisualizer extends Component {
               <td><img src="https://i.imgur.com/fnhxgNj.jpg" alt="" width="59" height="60" /></td>
               <td>
               <p style="text-align: left; padding-left: 10px">Click on this icon beside any pathfinding algorithm to view details about&nbsp;
-                how to use the algorithm, the time complexity, and detailed commented code about how the algorithm works.
+                how to use the algorithm and detailed commented code about how the algorithm works.
                 Feel free to go to my Github repository on the next page to see how they are implemented.</p>
               </td>
               </tr>
