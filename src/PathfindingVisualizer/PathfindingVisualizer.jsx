@@ -8,8 +8,8 @@ import { DFS } from "../algorithms/dfs";
 import { greedyBestFS } from "../algorithms/greedybestfs";
 import { biDirectional } from "../algorithms/BiDirectional";
 import { simpleMaze } from "../Maze/SimpleMaze";
-import { displayAlgorithmInfo } from "../algorithms/AlgorithmInfo";
 
+import { displayAlgorithmInfo } from "../algorithms/AlgorithmInfo";
 import "../Components/Button.css";
 import "../Components/Modal.css";
 import "../Components/AlgorithmModal.css";
@@ -37,6 +37,7 @@ export default class PathfindingVisualizer extends Component {
     componentDidMount() {
         const grid = getInitialGrid();
         this.setState({ grid });
+        // renders the Help Menu once page first loads
         window.onload = this.openHelpMenu();
     }
 
@@ -296,13 +297,13 @@ export default class PathfindingVisualizer extends Component {
                             Depth First Search
                         </button>
                         <button onClick={() => this.visualizeAlgorithm(3)}>
-                            A* Algorithm
+                            A*
                         </button>
                         <button onClick={() => this.visualizeAlgorithm(4)}>
                             Greedy Best First Search
                         </button>
                         <button onClick={() => this.visualizeWalls(0)}>
-                            Simple Maze
+                            BiDirectional BFS
                         </button>
                     </div>
 
@@ -464,12 +465,12 @@ export default class PathfindingVisualizer extends Component {
             case 1: {
                 document.getElementById("helpMenu-content").innerHTML =
                     this.HTMLHelper(MAXSLIDE) +
-                    `<h2 style= "margin-top: -0.3em;"> Welcome to the Pathfinding Visualizer </h2>
+                    `<h2 style= "margin-top: -0.3em;"> Welcome to the Pathfinding Visualizer!</h2>
             <p> This pathfinding application involves multiple path finding algorithms from the most famous ones i.e. Dijkstra to a basic search algorithm such as Breadth First Search. 
             Pathfinding algorithms normally compute the shortest path to take from one point to another. It is a fundamental component used in a myriad of applications e.g. Google maps, line following robots and much more. 
             You are also able to generate mazes to test the different algorithms. </p>
-            <p> Click on <strong>Next</strong> to continue the tutorial. Otherwise click anywhere outside the box, or the <strong>X</strong> button to play around with our application</p>
-            <p><img style="display: block; margin-left: auto; margin-right: auto; margin-top: 0px;" src="https://i.imgur.com/OkhlgCs.png" alt="" width="240" height="235" /></p>`;
+            <p> Click on <strong>Next</strong> to continue the tutorial. Otherwise click anywhere outside the box, or the <strong>X</strong> button to play around with the application.</p>
+            <p><img style="display: block; margin-left: auto; margin-right: auto; margin-top: 0px;" src="https://i.imgur.com/OkhlgCs.png" alt="" width="245" height="235" /></p>`;
                 break;
             }
 
@@ -497,11 +498,11 @@ export default class PathfindingVisualizer extends Component {
             <table style="height: 108px; width: 190; margin-left: auto; margin-right: auto;">
             <tbody>
             <tr style="height: 33.8px;">
-            <td style="width: 65px; height: 33.8px; text-align: center;"><img src="https://icons-for-free.com/iconfiles/png/512/double+arrow+doublechevronright+right+arrows+icon-1320185729292506033.png" alt="" width="35" height="40" /></td>
+            <td style="width: 65px; height: 33.8px; text-align: center;"><img src="https://i.imgur.com/IHB0b8r.png" alt="" width="35" height="40" /></td>
             <td style="width: 116px; height: 30px; text-align: left;">= Start Node</td>
             </tr>
             <tr style="height: 17px;">
-            <td style="width: 65px; height: 17px; text-align: center;"><img src="https://i.pinimg.com/originals/ba/3f/f2/ba3ff2209d0c43655116b31f8e2bbd65.png" alt="" width="30" height="35" /></td>
+            <td style="width: 65px; height: 17px; text-align: center;"><img src="https://i.pinimg.com/originals/ba/3f/f2/ba3ff2209d0c43655116b31f8e2bbd65.png" alt="" width="35" height="40" /></td>
             <td style="width: 116px; height: 17px; text-align: left;">= Finish Node</td>
             </tr>
             </tbody>
@@ -522,7 +523,7 @@ export default class PathfindingVisualizer extends Component {
               <td>
               <p style="text-align: left; padding-left: 10px">Click on this icon beside any pathfinding algorithm to view details about&nbsp;
                 how to use the algorithm, the time complexity, and detailed commented code about how the algorithm works.
-                Feel free to go to my Github repository on the next page to see how they are implemented</p>
+                Feel free to go to my Github repository on the next page to see how they are implemented.</p>
               </td>
               </tr>
               </tbody>
@@ -541,7 +542,7 @@ export default class PathfindingVisualizer extends Component {
               <table style="height: 227px; margin-left: auto; margin-right: auto; width: 552px;">
               <tbody>
               <tr>
-              <td style="width: 199px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://i.imgur.com/DdzVMbd.png" alt="" width="152" height="152" /></td>
+              <td style="width: 199px;"><img style="display: block; margin-left: auto; margin-right: auto; margin-top: auto;" src="https://i.imgur.com/DdzVMbd.png" alt="" width="152" height="152" /></td>
               </tr>
               </tbody>
               </table>
