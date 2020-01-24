@@ -1,3 +1,5 @@
+This project was created with an interest in pathfinding algorithms, you can try the [Demo](https://jamaicanfriedchicken.github.io/path-finding-visualizer/) here.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
