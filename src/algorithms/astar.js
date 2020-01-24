@@ -1,9 +1,10 @@
 import { getUnvisitedNeighbors } from "../algorithms/bfs";
 import Heap from "heap";
+
 var yetToVisit;
 
 export function astar(grid, startNode, finishNode) {
-    // check for invalid inputs
+    // checks for invalid inputs
     if (!startNode || !finishNode || startNode === finishNode) {
         return false;
     }
@@ -28,23 +29,23 @@ export function astar(grid, startNode, finishNode) {
     while (yetToVisit.length !== 0) {
         const currNode = yetToVisit.pop();
 
-        // if node is undefined or current node has fCost of infinity, return list of visited nodes
+        // if node is undefined or current node has fCost of infinity, returns the list of visited nodes
         if (typeof currNode === "undefined" || currNode.fCost === Infinity)
             return visitedNodesInOrder;
 
-        // if the node is a wall, perform loop again
+        // if the node is a wall, continues running
         if (currNode.isWall) continue;
 
-        // mark the node as visited and add to the list of visited nodes
+        // marks the node as visited and add it to the list of visited nodes
         currNode.visited = true;
         visitedNodesInOrder.push(currNode);
 
-        // if the node equals the finishNode, return the list of visited nodes
+        // if the node equals the finish node, returns the list of visited nodes
         if (currNode === finishNode) return visitedNodesInOrder;
 
-        // for all unvisited neighbors of the node, calculate h(n),
-        // we will be using manhattan distance. Then check the condition of g(n) and
-        // update the costs of the node respectively.
+        // for all unvisited neighbors of the node, calculate the heuristic h(n),
+        // Manhattan distance is used for calculating h(n). Then checks the condition of g(n) and
+        // updates the costs of the node respectively.
         const unvisitedNeighbours = getUnvisitedNeighbors(currNode, grid);
         for (const neighbor of unvisitedNeighbours) {
             if (!neighbor.isWall) {
@@ -68,6 +69,7 @@ export function astar(grid, startNode, finishNode) {
     return visitedNodesInOrder;
 }
 
+// calculates the Euclidean distance
 export function euclideanDistance(colA, colB, rowA, rowB) {
     const a = Math.abs(colA - colB);
     const b = Math.abs(rowA - rowB);
@@ -76,6 +78,7 @@ export function euclideanDistance(colA, colB, rowA, rowB) {
     return Math.pow(aSquared + bSquared, 0.5);
 }
 
+// calculates the Manhanttan distance
 export function manhattanDistance(colA, colB, rowA, rowB) {
     const a = Math.abs(colA - colB);
     const b = Math.abs(rowA - rowB);

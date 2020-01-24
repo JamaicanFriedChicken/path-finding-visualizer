@@ -1,46 +1,47 @@
-// import { getUnvisitedNeighbors } from "../algorithms/dijkstra";
-//import Queue from "../Components/Queue";
-
 export function BFS(grid, startNode, finishNode) {
-    //check for illegal inputs
+    //checks for invalid inputs
     if (!startNode || !finishNode || startNode === finishNode) {
         return false;
     }
     const visitedNodesInOrder = [];
-    var q = new Queue(); //create a new queue
+    //creates a new queue
+    var queue = new Queue();
 
     //initialize the start node distance to 0 and add it to the queue
     startNode.distance = 0;
-    q.enqueue(startNode);
+    queue.enqueue(startNode);
 
-    while (q.length !== 0) {
-        var currNode = q.dequeue();
+    while (queue.length !== 0) {
+        var currentNode = queue.dequeue();
 
-        //guard against invalid nodes
-        if (typeof currNode === "undefined") return visitedNodesInOrder;
+        // checks for any invalid nodes
+        if (typeof currentNode === "undefined") return visitedNodesInOrder;
 
         //if the node is a wall, repeat the loop again
-        if (currNode.isWall) continue;
+        if (currentNode.isWall) continue;
 
-        currNode.distance = 0;
-        currNode.visited = true;
-        visitedNodesInOrder.push(currNode);
+        // marks the node as visited and adds it to the list of visited nodes
+        currentNode.distance = 0;
+        currentNode.visited = true;
+        visitedNodesInOrder.push(currentNode);
 
-        if (currNode === finishNode) return visitedNodesInOrder;
+        // if the current node arrives at the goal, returns the list of the visited nodes
+        if (currentNode === finishNode) return visitedNodesInOrder;
 
-        const unvisitedNeighbours = getUnvisitedNeighbors(currNode, grid);
-
+        // fetches the unvisited neighbors of the current node and adds them to the queue
+        const unvisitedNeighbours = getUnvisitedNeighbors(currentNode, grid);
         for (const neighbor of unvisitedNeighbours) {
             if (!neighbor.isWall) {
-                q.enqueue(neighbor);
+                queue.enqueue(neighbor);
                 neighbor.visited = true;
-                neighbor.previousNode = currNode;
+                neighbor.previousNode = currentNode;
                 neighbor.distance = 0;
             }
         }
     }
 }
 
+// fetches the neighbors(up, down, left and right) of the current node
 export function getAllFourNeighbors(node, grid) {
     const neighbors = [];
     const { col, row } = node;
@@ -51,51 +52,12 @@ export function getAllFourNeighbors(node, grid) {
     return neighbors;
 }
 
+// returns all the neighbors of the node from the grid
 export function getUnvisitedNeighbors(node, grid) {
     var neighbors = getAllFourNeighbors(node, grid);
     // get rid of neighbors that were already visited
     return neighbors.filter(neighbor => !neighbor.visited);
 }
-
-// function BFScommented(grid, startNode, finishNode) {
-//   //check for illegal inputs
-//   if (!startNode || !finishNode || startNode === finishNode) {
-//     return false;
-//   }
-//   const visitedNodesInOrder = [];
-//   var q = new Queue(); //create a new queue
-
-//   //initialize the start node distance to 0 and add it to the queue
-//   startNode.distance = 0;
-//   q.enqueue(startNode);
-
-//   while (q.length !== 0) {
-//     var currNode = q.dequeue();
-
-//     //guard against invalid nodes
-//     if (typeof currNode === "undefined") return visitedNodesInOrder;
-
-//     //if the node is a wall, repeat the loop again
-//     if (currNode.isWall) continue;
-
-//     //mark the node as visited and add it to the list of visited nodes
-//     currNode.visited = true;
-//     visitedNodesInOrder.push(currNode);
-
-//     //if the current node equals the finish node, return the list of visited nodes
-//     if (currNode === finishNode) return visitedNodesInOrder;
-
-//     //get univisited neighbors of the current node and add them to the queue
-//     const unvisitedNeighbours = getUnvisitedNeighbors(currNode, grid);
-//     for (const neighbor of unvisitedNeighbours) {
-//       if (!neighbor.isWall) {
-//         q.enqueue(neighbor);
-//         neighbor.visited = true;
-//         neighbor.previousNode = currNode;
-//       }
-//     }
-//   }
-// }
 
 /*
 Queue.js

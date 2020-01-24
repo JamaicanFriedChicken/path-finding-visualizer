@@ -5,39 +5,51 @@ import { euclideanDistance } from "../algorithms/astar";
 var yetToVisit;
 
 export function greedyBestFS(grid, startNode, finishNode) {
+    // checks for invalid inputs
     if (!startNode || !finishNode || startNode === finishNode) {
         return false;
     }
 
     const visitedNodesInOrder = [];
 
+    // creates a priority queue such that yetToVisit.pop() returns the node with the
+    // lowest fCost value
     yetToVisit = new Heap(function(a, b) {
         return a.fCost - b.fCost;
     });
 
+    // sets the hCost and fCost of every node in the grid to infinity
     initializeCosts(grid);
 
+    // initializes start node's fCost to zero and adds it to the priority queue
     startNode.fCost = 0;
-
     yetToVisit.updateItem(startNode);
     yetToVisit.heapify();
 
+    // Core loop
     while (yetToVisit.size() > 0) {
-        const currNode = yetToVisit.pop();
+        // returns the node with the lowest fCost as the current node
+        const currentNode = yetToVisit.pop();
 
-        if (typeof currNode === "undefined") return visitedNodesInOrder;
-        if (currNode.fCost === Infinity) return visitedNodesInOrder;
+        // if the current node is invalid, returns the visited nodes
+        if (typeof currentNode === "undefined") return visitedNodesInOrder;
 
-        if (currNode.isWall) continue;
+        // if the current node's fCost is infinity, returns the visited nodes
+        if (currentNode.fCost === Infinity) return visitedNodesInOrder;
 
-        currNode.visited = true;
+        // if the current node is a wall, skips the node
+        if (currentNode.isWall) continue;
 
-        visitedNodesInOrder.push(currNode);
+        // marks the current node as visited and pushes it to the list of visited nodes
+        currentNode.visited = true;
+        visitedNodesInOrder.push(currentNode);
 
-        if (currNode === finishNode) return visitedNodesInOrder;
+        // if current node has found the finish node, returns the visited nodes
+        if (currentNode === finishNode) return visitedNodesInOrder;
 
-        const unvisitedNeighbours = getUnvisitedNeighbors(currNode, grid);
-
+        // for all unvisited neighbors of the node, calculate the heuristics h(n)
+        // Utilises Euclidean distance, then checks f(n) and updates the costs of the nodes respectively
+        const unvisitedNeighbours = getUnvisitedNeighbors(currentNode, grid);
         for (const neighbor of unvisitedNeighbours) {
             if (!neighbor.isWall) {
                 const hCost = euclideanDistance(
@@ -49,7 +61,7 @@ export function greedyBestFS(grid, startNode, finishNode) {
 
                 if (neighbor.fCost > hCost) {
                     neighbor.fCost = hCost; //no g cost
-                    neighbor.previousNode = currNode;
+                    neighbor.previousNode = currentNode;
                     yetToVisit.updateItem(neighbor);
                 }
             }
@@ -59,6 +71,7 @@ export function greedyBestFS(grid, startNode, finishNode) {
     return visitedNodesInOrder;
 }
 
+// initializes the fcosts and hcosts of the nodes to infinity
 function initializeCosts(grid) {
     for (let row of grid) {
         for (let node of row) {

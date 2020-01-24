@@ -9,7 +9,7 @@ export function simpleMaze(grid, startNode, finishNode) {
     // getRandomNumber function.
     for (const row of grid) {
         for (const node of row) {
-            if (getRandomNumber(0, 100) < 50 && getRandomNumber(0, 10) < 5) {
+            if (getRandomNumber(0, 100) < 50 && getRandomNumber(0, 4) < 2) {
                 if (!node.isStart && !node.isFinish) {
                     turnNodesToWalls.push(node);
                     node.isWall = true;
