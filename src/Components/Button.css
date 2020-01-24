@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+.btn-group button {
+    width: 180px;
+    height: 67px;
+    background-color: #1abc9c;
+    padding: 5px;
+    border: 4px solid #1abc9c;
+    border-radius: 10px;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin-right: 15px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.btn-group button:hover {
+    background-color: hsl(214, 51%, 61%);
+    transform: scale(1.08);
+    transition: all 0.2s ease;
+    color: rgb(225, 226, 159);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 0px 10px 15px;
+    justify-content: left;
+    /* margin-top: -20px; */
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: solid rgb(52, 73, 94);
+    background-color: rgb(52, 73, 94);
+    padding: 0px 0px 0px 0px;
+    height: 60px;
+}
+
+.title {
+    width: 360px;
+    display: block;
+    height: 60px;
+    font-size: 40px;
+    font-weight: bolder;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    /* text-decoration: underline; */
+    text-decoration-color: white;
+    text-align: center;
+    font-family: "Open Sans Condensed", sans-serif;
+    cursor: pointer;
+    background-color: rgb(52, 73, 94);
+}
+
+.title-button-row button {
+    width: auto;
+    height: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding: 5px;
+    border: 4px solid #1abc9c;
+    border-radius: 6px;
+    display: inline-block;
+    background-color: #1abc9c;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 10px;
+    text-align: center;
+    transition: all 0.2s ease;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box;
+}
+
+.title-button-row button:hover {
+    background-color: hsl(214, 51%, 61%);
+    transform: scale(1.08);
+    transition: all 0.2s ease;
+    color: rgb(225, 226, 159);
+}
+
+.info-button {
+    width: 40px;
+    height: 40px;
+    padding: 0%;
+    border-radius: 50%;
+    border: 3px solid hsl(214, 90%, 23%);
+    background-color: hsl(214, 100%, 70%);
+    color: #ffffff;
+    font-size: 20px;
+    font-family: "Lato", sans-serif;
+    font-weight: lighter;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.info-button:hover {
+    background-color: hsl(214, 51%, 61%);
+    transform: scale(1.08);
+    transition: all 0.2s ease;
+    color: rgb(225, 226, 159);
+    border-radius: 50%;
+}
+
+.algo-btn-group button {
+    width: 40px;
+    height: 40px;
+    border: 3px solid hsl(214, 90%, 23%);
+    background-color: hsl(214, 100%, 70%);
+    color: #ffffff;
+    font-size: 22px;
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    cursor: pointer;
+    display: block;
+    margin-left: -3px;
+    margin-right: 10px;
+    margin-bottom: 60px;
+    margin-top: 10%;
+    text-align: center;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    padding: 0px;
+    -webkit-padding-start: 0px;
+}
+
+.algo-btn-group button:hover {
+    background-color: hsl(214, 51%, 61%);
+    transform: scale(1.08);
+    transition: all 0.2s ease;
+    color: rgb(225, 226, 159);
+}
+
+.algo-btn-group button:first-child {
+    margin-top: 34px;
+}
